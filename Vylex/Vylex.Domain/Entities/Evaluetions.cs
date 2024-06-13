@@ -1,4 +1,5 @@
 ﻿using System.ComponentModel.DataAnnotations;
+using System.ComponentModel.DataAnnotations.Schema;
 
 namespace Vylex.Domain.Entities;
 
@@ -17,10 +18,13 @@ public class Evaluetions : BaseEntity
     public string Comment { get; private set; }
 
     [Required]
+    [ForeignKey("StudentId")]
     public Guid StudentId { get; private set; }
     public Students Student { get; private set; }
 
     [Required]
+    [ForeignKey("CourseId")]
     public Guid CourseId { get; private set; }
     public Courses Course { get; private set; }
+
 }

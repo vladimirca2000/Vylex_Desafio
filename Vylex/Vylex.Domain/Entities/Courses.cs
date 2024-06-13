@@ -13,4 +13,6 @@ public class Courses : BaseEntity
     [Display(Name = "Course Description")]
     [StringLength(100, MinimumLength = 5, ErrorMessage = "The description of the study must be between 5 and 100 letters")]
     public string Description { get; set; }
+
+    public ICollection<Evaluetions> Evaluetions { get; set; }
 }

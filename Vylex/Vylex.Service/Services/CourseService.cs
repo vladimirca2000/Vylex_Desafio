@@ -1,11 +1,15 @@
 ﻿using Vylex.Domain.DTOs.Course;
 using Vylex.Domain.Entities;
+using Vylex.Domain.Interfaces.Repositories;
 using Vylex.Domain.Interfaces.Services;
 
 namespace Vylex.Service.Services;
 
 public class CourseService : ICourseService
 {
+    private readonly IRepository<Course> _repository;
+
+
     public Task AddCourseAsync(CourseDtoCreate course)
     {
         throw new NotImplementedException();

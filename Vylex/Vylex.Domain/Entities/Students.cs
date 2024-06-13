@@ -14,4 +14,6 @@ public class Students : BaseEntity
     [EmailAddress(ErrorMessage = "The email is invalid.")]
     [StringLength(50, MinimumLength = 5, ErrorMessage = "The email must be between 5 and 50 letters")]
     public string Email { get; private set; }
+
+    public ICollection<Evaluetions> Evaluetions { get; private set; }
 }
