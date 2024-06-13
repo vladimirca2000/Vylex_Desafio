@@ -19,12 +19,12 @@ public class Evaluetions : BaseEntity
 
     [Required]
     [ForeignKey("StudentId")]
-    public Guid StudentId { get; private set; }
+    public int StudentId { get; private set; }
     public Students Student { get; private set; }
 
     [Required]
     [ForeignKey("CourseId")]
-    public Guid CourseId { get; private set; }
+    public int CourseId { get; private set; }
     public Courses Course { get; private set; }
 
 }

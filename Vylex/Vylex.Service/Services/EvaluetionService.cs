@@ -5,35 +5,34 @@ using Vylex.Domain.Interfaces.Services;
 
 namespace Vylex.Service.Services;
 
-public class CourseService : ICourseService
+public class EvaluetionService : IEvaluetionService
 {
-    private readonly IRepository<Courses> _repository;
-    public CourseService(IRepository<Courses> repository)
+    private readonly IRepository<Evaluetions> _repository;
+    public EvaluetionService(IRepository<Evaluetions> repository)
     {
         _repository = repository;
     }
-
-    public Task AddCourseAsync(CourseDtoCreate course)
+    public Task AddEvaluetionAsync(EvaluetionDtoCreate evaluetion)
     {
         throw new NotImplementedException();
     }
 
-    public Task DeleteCourseAsync(int id)
+    public Task DeleteEvaluetionAsync(int id)
     {
         throw new NotImplementedException();
     }
 
-    public Task<CourseDtoResult> GetCourseByIdAsync(int id)
+    public Task<EvaluetionDtoResult> GetEvaluetionByIdAsync(int id)
     {
         throw new NotImplementedException();
     }
 
-    public Task<IEnumerable<CourseDtoResult>> GetCoursesAsync()
+    public Task<IEnumerable<EvaluetionDtoResult>> GetEvaluetionsAsync()
     {
         throw new NotImplementedException();
     }
 
-    public Task UpdateCourseAsync(int id, CourseDtoUpdate course)
+    public Task UpdateEvaluetionAsync(int id, EvaluetionDtoUpdate evaluetion)
     {
         throw new NotImplementedException();
     }

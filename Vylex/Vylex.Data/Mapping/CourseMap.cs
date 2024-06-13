@@ -12,14 +12,23 @@ public class CourseMap : IEntityTypeConfiguration<Courses>
 
         builder.HasKey(c => c.Id);
 
+        builder.Property(c => c.Id)
+            .IsRequired()
+            .HasColumnName("Id")
+            .HasColumnType("int");
+
         builder.HasIndex(c => c.CourseName)
-               .IsUnique();
+            .IsUnique();
 
         builder.Property(c => c.CourseName)
-               .IsRequired()
-               .HasMaxLength(30);
+            .IsRequired()
+            .HasColumnName("CourseName")            
+            .HasColumnType("varchar(30)")
+            .HasMaxLength(30);
 
         builder.Property(c => c.Description)
-               .HasMaxLength(100);
+            .HasColumnName("Description")
+            .HasColumnType("varchar(100)")
+            .HasMaxLength(100);
     }
 }

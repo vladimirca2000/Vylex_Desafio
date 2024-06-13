@@ -12,21 +12,36 @@ public class EvaluetionMap : IEntityTypeConfiguration<Evaluetions>
 
         builder.HasKey(e => e.Id);
 
+        builder.Property(c => c.Id)
+            .IsRequired()
+            .HasColumnName("Id")
+            .HasColumnType("int");
+
         builder.Property(e => e.DateTimeEvaluetion)
                .IsRequired()
+               .HasColumnName("DateEvaluetion")
+               .HasColumnType("datetime")
                .HasMaxLength(30);
 
         builder.Property(e => e.StarEvaluetion)
-               .IsRequired();
+                .IsRequired()
+               .HasColumnName("StarEvaluetion")
+               .HasColumnType("int")               
+               .HasDefaultValue(1);
 
         builder.Property(e => e.Comment)
                .HasMaxLength(100);
 
         builder.Property(e => e.StudentId)
-               .IsRequired();
+               .IsRequired()
+               .HasColumnType("int")
+               .HasColumnName("StudentId");
+
 
         builder.Property(e => e.CourseId)
-            .IsRequired();
+            .IsRequired()
+            .HasColumnType("int")
+            .HasColumnName("CourseId");
 
         builder.HasOne(c => c.Student)
                .WithMany()
@@ -34,6 +49,6 @@ public class EvaluetionMap : IEntityTypeConfiguration<Evaluetions>
 
         builder.HasOne(c => c.Course)
             .WithMany()
-                .HasForeignKey(c => c.CourseId);
+            .HasForeignKey(c => c.CourseId);
     }
 }

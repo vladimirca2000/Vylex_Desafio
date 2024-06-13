@@ -12,6 +12,4 @@ public class CourseRepository : BaseRepository<Courses>, ICourseRepositoty
     {
         _dataset = context.Set<Courses>();
     }
-
-
 }

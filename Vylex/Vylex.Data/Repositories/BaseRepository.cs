@@ -16,7 +16,7 @@ public class BaseRepository<T> : IRepository<T> where T : BaseEntity
         _dataset = _context.Set<T>();
     }
 
-    public async Task<bool> DeleteAsync(Guid id)
+    public async Task<bool> DeleteAsync(int id)
     {
         try
         {
@@ -34,7 +34,7 @@ public class BaseRepository<T> : IRepository<T> where T : BaseEntity
         }
     }
 
-    public async Task<bool> ExistAsync(Guid id)
+    public async Task<bool> ExistAsync(int id)
     {
         return await _dataset.AnyAsync(P => P.Id.Equals(id));
     }
@@ -43,11 +43,6 @@ public class BaseRepository<T> : IRepository<T> where T : BaseEntity
     {
         try
         {
-            if (item.Id == Guid.Empty)
-            {
-                item.Id = Guid.NewGuid();
-            }
-
             _dataset.Add(item);
 
             await _context.SaveChangesAsync();
@@ -59,7 +54,7 @@ public class BaseRepository<T> : IRepository<T> where T : BaseEntity
         return item;
     }
 
-    public async Task<T> SelectAsync(Guid id)
+    public async Task<T> SelectAsync(int id)
     {
         try
         {

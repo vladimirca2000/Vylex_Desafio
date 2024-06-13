@@ -1,11 +1,11 @@
 ﻿using System.ComponentModel.DataAnnotations;
 
-namespace Vylex.Domain.DTOs.Course;
+namespace Vylex.Domain.DTOs;
 
 public class CourseDtoUpdate
 {
     [Required]
-    public Guid Id { get; set; }
+    public int Id { get; set; }
 
     [Required(ErrorMessage = "The name of the course is required.")]
     [StringLength(30, MinimumLength = 5, ErrorMessage = "The name of the study must be between 5 and 30 letters")]

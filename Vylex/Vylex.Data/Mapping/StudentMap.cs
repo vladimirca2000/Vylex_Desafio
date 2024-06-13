@@ -12,15 +12,28 @@ public class StudentMap : IEntityTypeConfiguration<Students>
 
         builder.HasKey(c => c.Id);
 
-        builder.Property(c => c.StudentName)
-               .IsRequired()
-               .HasMaxLength(50);
+        builder.Property(c => c.Id)
+                .IsRequired()
+                .HasColumnName("Id")
+                .HasColumnType("int");
 
         builder.HasIndex(c => c.Email)
                .IsUnique();
 
         builder.Property(c => c.Email)
-               .IsRequired()
+                .IsRequired()
+                .HasColumnName("Email")
+                .HasColumnType("varchar(50)")
                .HasMaxLength(50);
+
+        builder.Property(c => c.StudentName)
+               .IsRequired()
+               .HasColumnName("NomeEstudante")
+               .HasColumnType("varchar(80)")
+               .HasMaxLength(50);
+
+        
+
+        
     }
 }

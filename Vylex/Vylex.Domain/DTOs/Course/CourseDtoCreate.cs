@@ -1,6 +1,6 @@
 ﻿using System.ComponentModel.DataAnnotations;
 
-namespace Vylex.Domain.DTOs.Course;
+namespace Vylex.Domain.DTOs;
 
 public class CourseDtoCreate
 {

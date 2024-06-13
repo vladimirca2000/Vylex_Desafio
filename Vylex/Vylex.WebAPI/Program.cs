@@ -1,30 +1,42 @@
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
+using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Design;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 
 using Vylex.CrossCutting.DependencyInjection;
 using Vylex.Data.Context;
+using Vylex.WebAPI.Configurations;
 
 
 var builder = WebApplication.CreateBuilder(args);
 
+builder.Configuration
+    .SetBasePath(builder.Environment.ContentRootPath)
+    .AddJsonFile("appsettings.json", true, true)
+    .AddJsonFile($"appsettings.{builder.Environment.EnvironmentName}.json", true, true)
+    .AddEnvironmentVariables();
+
 builder.Services.AddServices();
+
 
 ///
 /// Add services to the container.
 /// 
 builder.Services.AddControllers();
 
+
+// Setting DBContexts
+builder.Services.AddDatabaseConfiguration(builder.Configuration);
+
+// .NET Native DI Abstraction
+builder.Services.AddDependencyInjectionConfiguration();
+
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
 
-
 var app = builder.Build();
-
-var contextFactory = app.Services.GetRequiredService<IDesignTimeDbContextFactory<ContextBase>>();
-using var context = contextFactory.CreateDbContext(args);
 
 
 ///
@@ -44,7 +56,6 @@ app.UseHttpsRedirection();
 app.UseAuthorization();
 
 app.MapControllers();
-
 
 
 app.Run();

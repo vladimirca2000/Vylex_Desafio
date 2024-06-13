@@ -1,4 +1,4 @@
-﻿using Vylex.Domain.DTOs.Course;
+﻿using Vylex.Domain.DTOs;
 
 namespace Vylex.Domain.Interfaces.Services;
 

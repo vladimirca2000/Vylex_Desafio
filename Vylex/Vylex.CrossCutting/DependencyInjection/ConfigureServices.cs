@@ -1,6 +1,4 @@
-﻿using Microsoft.EntityFrameworkCore.Design;
-using Microsoft.Extensions.DependencyInjection;
-using Vylex.Data.Context;
+﻿using Microsoft.Extensions.DependencyInjection;
 using Vylex.Data.Repositories;
 using Vylex.Domain.Interfaces.Repositories;
 using Vylex.Domain.Interfaces.Services;
@@ -13,20 +11,19 @@ public static class ConfigureServices
     public static void AddServices(this IServiceCollection services)
     {
         ///
-        /// Serviço do contexto
-        /// 
-        services.AddSingleton<IDesignTimeDbContextFactory<ContextBase>, ContextFactory>();
-
-        ///
         /// Serviços
         /// 
         services.AddTransient<ICourseService, CourseService>();
+        services.AddTransient<IStudantService, StudentService>();
+        services.AddTransient<IEvaluetionService, EvaluetionService>();
 
         ///
         /// Repositórios
         /// 
         services.AddScoped(typeof(IRepository<>), typeof(BaseRepository<>));
         services.AddScoped<ICourseRepositoty, CourseRepository>();
+        services.AddScoped<IStudentRepository, StudentRepository>();
+        services.AddScoped<IEvaluetionRepository, EvaluetionRepository>();
 
     }
 }

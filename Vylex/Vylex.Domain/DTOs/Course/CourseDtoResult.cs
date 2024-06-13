@@ -1,8 +1,8 @@
-﻿namespace Vylex.Domain.DTOs.Course;
+﻿namespace Vylex.Domain.DTOs;
 
 public class CourseDtoResult
 {
-    public Guid Id { get; set; }
+    public int Id { get; set; }
     public string CourseName { get; set; }
     public string Description { get; set; }
 }
