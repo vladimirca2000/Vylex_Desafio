@@ -17,7 +17,7 @@ public static class ConfigureServices
         /// Serviços
         /// 
         services.AddScoped<ICourseService, CourseService>();
-        services.AddScoped<IStudantService, StudentService>();
+        services.AddScoped<IStudentService, StudentService>();
         services.AddScoped<IEvaluetionService, EvaluetionService>();
 
         ///

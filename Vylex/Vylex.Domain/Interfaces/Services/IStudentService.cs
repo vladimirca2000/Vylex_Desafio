@@ -2,7 +2,7 @@
 
 namespace Vylex.Domain.Interfaces.Services;
 
-public interface IStudantService
+public interface IStudentService
 {
     Task<IEnumerable<StudentDtoResult>> GetStudentsAsync();
     Task<StudentDtoResult> GetStudentByIdAsync(int id);

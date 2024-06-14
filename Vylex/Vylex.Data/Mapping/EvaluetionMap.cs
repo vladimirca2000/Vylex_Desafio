@@ -38,17 +38,17 @@ public class EvaluetionMap : IEntityTypeConfiguration<Evaluetions>
                .HasColumnName("StudentId");
 
 
+
         builder.Property(e => e.CourseId)
             .IsRequired()
             .HasColumnType("int")
             .HasColumnName("CourseId");
 
+
         builder.HasOne(c => c.Student)
-               .WithMany()
-               .HasForeignKey(c => c.StudentId);        
+               .WithMany(e => e.Evaluetions); ;
 
         builder.HasOne(c => c.Course)
-            .WithMany()
-            .HasForeignKey(c => c.CourseId);
+            .WithMany(e => e.Evaluetions);
     }
 }

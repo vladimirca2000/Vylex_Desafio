@@ -17,26 +17,26 @@ public class EvaluetionService : IEvaluetionService
     }
     public Task AddEvaluetionAsync(EvaluetionDtoCreate evaluetion)
     {
-        throw new NotImplementedException();
+        return _repository.InsertAsync(_mapper.Map<Evaluetions>(evaluetion));
     }
 
     public Task DeleteEvaluetionAsync(int id)
     {
-        throw new NotImplementedException();
+        return _repository.DeleteAsync(id);
     }
 
     public Task<EvaluetionDtoResult> GetEvaluetionByIdAsync(int id)
     {
-        throw new NotImplementedException();
+        return _repository.SelectAsync(id).ContinueWith(task => _mapper.Map<EvaluetionDtoResult>(task.Result));
     }
 
     public Task<IEnumerable<EvaluetionDtoResult>> GetEvaluetionsAsync()
     {
-        throw new NotImplementedException();
+        return _repository.SelectAllAsync().ContinueWith(task => _mapper.Map<IEnumerable<EvaluetionDtoResult>>(task.Result));
     }
 
     public Task UpdateEvaluetionAsync(int id, EvaluetionDtoUpdate evaluetion)
     {
-        throw new NotImplementedException();
+        return _repository.UpdateAsync(id, _mapper.Map<Evaluetions>(evaluetion));
     }
 }

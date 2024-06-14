@@ -1,4 +1,6 @@
+using Microsoft.AspNetCore.Builder;
 using Vylex.CrossCutting.DependencyInjection;
+using Vylex.Data.Context;
 using Vylex.WebAPI.Configurations;
 
 
@@ -31,22 +33,25 @@ builder.Services.AddEndpointsApiExplorer();
 // AutoMapper Settings
 builder.Services.AddAutoMapperConfiguration();
 
-builder.Services.AddSwaggerGen();
+// Swagger Config
+builder.Services.AddSwaggerConfiguration();
 
 var app = builder.Build();
 
+using (var scope = app.Services.CreateScope())
+{
+    using var context = scope.ServiceProvider.GetRequiredService<ContextoBase>();
+    context.Database.EnsureCreated();
+}
 
-///
-/// A linha de configuração do ambiente de develomente não foi colocada propositalmente.
-/// 
-/// if (app.Environment.IsDevelopment()) 
-/// 
-/// deveria ser usado para configurar o Swagger apenas em ambiente de desenvolvimento
-/// Para fins de apresentação, o Swagger foi configurado para todos os ambientes
-///
+app.UseRouting();
 
-app.UseSwagger();
-app.UseSwaggerUI();
+app.UseCors(c =>
+{
+    c.AllowAnyHeader();
+    c.AllowAnyMethod();
+    c.AllowAnyOrigin();
+});
 
 app.UseHttpsRedirection();
 
@@ -54,5 +59,6 @@ app.UseAuthorization();
 
 app.MapControllers();
 
+app.UseSwaggerSetup();
 
 app.Run();

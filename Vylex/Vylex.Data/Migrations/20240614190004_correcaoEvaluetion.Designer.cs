@@ -2,6 +2,7 @@
 using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using Vylex.Data.Context;
 
@@ -10,9 +11,10 @@ using Vylex.Data.Context;
 namespace Vylex.Data.Migrations
 {
     [DbContext(typeof(ContextoBase))]
-    partial class ContextoBaseModelSnapshot : ModelSnapshot
+    [Migration("20240614190004_correcaoEvaluetion")]
+    partial class correcaoEvaluetion
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder

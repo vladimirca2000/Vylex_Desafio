@@ -7,7 +7,7 @@ using Vylex.Domain.Interfaces.Services;
 
 namespace Vylex.Service.Services;
 
-public class StudentService : IStudantService
+public class StudentService : IStudentService
 {
     private readonly IRepository<Students> _repository;
     private readonly IMapper _mapper;
@@ -20,26 +20,26 @@ public class StudentService : IStudantService
 
     public Task AddStudentAsync(StudentDtoCreate student)
     {
-        throw new NotImplementedException();
+        return _repository.InsertAsync(_mapper.Map<Students>(student));
     }
 
     public Task DeleteStudentAsync(int id)
     {
-        throw new NotImplementedException();
+        return _repository.DeleteAsync(id);
     }
 
     public Task<StudentDtoResult> GetStudentByIdAsync(int id)
     {
-        throw new NotImplementedException();
+        return _repository.SelectAsync(id).ContinueWith(task => _mapper.Map<StudentDtoResult>(task.Result));
     }
 
     public Task<IEnumerable<StudentDtoResult>> GetStudentsAsync()
     {
-        throw new NotImplementedException();
+        return _repository.SelectAllAsync().ContinueWith(task => _mapper.Map<IEnumerable<StudentDtoResult>>(task.Result));
     }
 
     public Task UpdateStudentAsync(int id, StudentDtoUpdate student)
     {
-        throw new NotImplementedException();
+        return _repository.UpdateAsync(id, _mapper.Map<Students>(student));
     }
 }

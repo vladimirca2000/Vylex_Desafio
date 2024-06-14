@@ -1,4 +1,5 @@
 ﻿using Microsoft.EntityFrameworkCore;
+using Microsoft.EntityFrameworkCore.Storage;
 using Vylex.Data.Mapping;
 using Vylex.Domain.Entities;
 
@@ -12,6 +13,8 @@ public sealed class ContextoBase : DbContext
 
     public ContextoBase(DbContextOptions<ContextoBase> options) : base(options)
     {
+        //Database.Migrate();
+        //Database.EnsureCreated();
     }
 
     protected override void OnModelCreating(ModelBuilder modelBuilder)
