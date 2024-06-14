@@ -25,7 +25,7 @@
 
   <ItemGroup>
     <ProjectReference Include="..\Vylex.CrossCutting\Vylex.CrossCutting.csproj" />
-    <ProjectReference Include="..\Vylex.Data\Vylex.Data.csproj" />
+    <ProjectReference Include="..\Vylex.Domain\Vylex.Domain.csproj" />
     <ProjectReference Include="..\Vylex.Service\Vylex.Service.csproj" />
   </ItemGroup>
 

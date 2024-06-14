@@ -12,7 +12,7 @@ public static class DatabaseConfig
     {
         if (services == null) throw new ArgumentNullException(nameof(services));
 
-        services.AddDbContext<ContextBase>(options =>
+        services.AddDbContext<ContextoBase>(options =>
         options.UseMySql(configuration.GetConnectionString("DefaultConnection"), ServerVersion.AutoDetect(configuration.GetConnectionString("DefaultConnection"))));
 
     }

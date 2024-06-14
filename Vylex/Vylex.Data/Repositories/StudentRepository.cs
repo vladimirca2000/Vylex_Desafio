@@ -8,7 +8,7 @@ namespace Vylex.Data.Repositories;
 public class StudentRepository : BaseRepository<Students>, IStudentRepository
 {
     private DbSet<Students> _dataset;
-    public StudentRepository(ContextBase context) : base(context)
+    public StudentRepository(ContextoBase context) : base(context)
     {
         _dataset = context.Set<Students>();
     }

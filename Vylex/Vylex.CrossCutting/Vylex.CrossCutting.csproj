@@ -15,6 +15,7 @@
 
   <ItemGroup>
     <ProjectReference Include="..\Vylex.Data\Vylex.Data.csproj" />
+    <ProjectReference Include="..\Vylex.Domain\Vylex.Domain.csproj" />
     <ProjectReference Include="..\Vylex.Service\Vylex.Service.csproj" />
   </ItemGroup>
 

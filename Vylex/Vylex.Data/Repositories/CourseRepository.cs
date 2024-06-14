@@ -8,7 +8,7 @@ namespace Vylex.Data.Repositories;
 public class CourseRepository : BaseRepository<Courses>, ICourseRepositoty
 {
     private DbSet<Courses> _dataset;
-    public CourseRepository(ContextBase context) : base(context)
+    public CourseRepository(ContextoBase context) : base(context)
     {
         _dataset = context.Set<Courses>();
     }

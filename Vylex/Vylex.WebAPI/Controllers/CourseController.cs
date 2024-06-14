@@ -1,6 +1,5 @@
-﻿using Microsoft.AspNetCore.Http;
-using Microsoft.AspNetCore.Mvc;
-using Vylex.Domain.DTOs.Course;
+﻿using Microsoft.AspNetCore.Mvc;
+using Vylex.Domain.DTOs;
 using Vylex.Domain.Interfaces.Services;
 
 namespace Vylex.WebAPI.Controllers;
@@ -17,35 +16,35 @@ public class CourseController : ControllerBase
     }
 
     [HttpGet]
-    public async Task<IActionResult> Get()
+    public async Task<ActionResult> Get()
     {
         var courses = await _courseService.GetCoursesAsync();
         return Ok(courses);
     }
 
     [HttpGet("{id}")]
-    public async Task<IActionResult> Get(int id)
+    public async Task<ActionResult> Get(int id)
     {
         var course = await _courseService.GetCourseByIdAsync(id);
         return Ok(course);
     }
 
     [HttpPost]
-    public async Task<IActionResult> Post([FromBody] CourseDtoCreate course)
+    public async Task<ActionResult> Post([FromBody] CourseDtoCreate course)
     {
         await _courseService.AddCourseAsync(course);
         return Ok();
     }
 
     [HttpPut("{id}")]
-    public async Task<IActionResult> Put(int id, [FromBody] CourseDtoUpdate course)
+    public async Task<ActionResult> Put(int id, [FromBody] CourseDtoUpdate course)
     {
         await _courseService.UpdateCourseAsync(id, course);
         return Ok();
     }
 
     [HttpDelete("{id}")]
-    public async Task<IActionResult> Delete(int id)
+    public async Task<ActionResult> Delete(int id)
     {
         await _courseService.DeleteCourseAsync(id);
         return Ok();

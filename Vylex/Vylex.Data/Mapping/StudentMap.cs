@@ -28,7 +28,7 @@ public class StudentMap : IEntityTypeConfiguration<Students>
 
         builder.Property(c => c.StudentName)
                .IsRequired()
-               .HasColumnName("NomeEstudante")
+               .HasColumnName("NameStudent")
                .HasColumnType("varchar(80)")
                .HasMaxLength(50);
 

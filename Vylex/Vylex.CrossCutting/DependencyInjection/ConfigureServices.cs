@@ -1,4 +1,5 @@
 ﻿using Microsoft.Extensions.DependencyInjection;
+using Vylex.Data.Context;
 using Vylex.Data.Repositories;
 using Vylex.Domain.Interfaces.Repositories;
 using Vylex.Domain.Interfaces.Services;
@@ -10,12 +11,14 @@ public static class ConfigureServices
 {
     public static void AddServices(this IServiceCollection services)
     {
+       
+
         ///
         /// Serviços
         /// 
-        services.AddTransient<ICourseService, CourseService>();
-        services.AddTransient<IStudantService, StudentService>();
-        services.AddTransient<IEvaluetionService, EvaluetionService>();
+        services.AddScoped<ICourseService, CourseService>();
+        services.AddScoped<IStudantService, StudentService>();
+        services.AddScoped<IEvaluetionService, EvaluetionService>();
 
         ///
         /// Repositórios
@@ -24,6 +27,8 @@ public static class ConfigureServices
         services.AddScoped<ICourseRepositoty, CourseRepository>();
         services.AddScoped<IStudentRepository, StudentRepository>();
         services.AddScoped<IEvaluetionRepository, EvaluetionRepository>();
+
+        services.AddScoped<ContextoBase>();
 
     }
 }

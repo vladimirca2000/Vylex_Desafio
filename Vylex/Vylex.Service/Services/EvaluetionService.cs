@@ -1,4 +1,5 @@
-﻿using Vylex.Domain.DTOs;
+﻿using AutoMapper;
+using Vylex.Domain.DTOs;
 using Vylex.Domain.Entities;
 using Vylex.Domain.Interfaces.Repositories;
 using Vylex.Domain.Interfaces.Services;
@@ -8,9 +9,11 @@ namespace Vylex.Service.Services;
 public class EvaluetionService : IEvaluetionService
 {
     private readonly IRepository<Evaluetions> _repository;
-    public EvaluetionService(IRepository<Evaluetions> repository)
+    private readonly IMapper _mapper;
+    public EvaluetionService(IRepository<Evaluetions> repository, IMapper mapper)
     {
         _repository = repository;
+        _mapper = mapper;
     }
     public Task AddEvaluetionAsync(EvaluetionDtoCreate evaluetion)
     {

@@ -8,7 +8,7 @@ namespace Vylex.Data.Repositories;
 public class EvaluetionRepository : BaseRepository<Evaluetions>, IEvaluetionRepository
 { 
     private DbSet<Evaluetions> _dataset;
-    public EvaluetionRepository(ContextBase context) : base(context)
+    public EvaluetionRepository(ContextoBase context) : base(context)
     {
         _dataset = context.Set<Evaluetions>();
         }

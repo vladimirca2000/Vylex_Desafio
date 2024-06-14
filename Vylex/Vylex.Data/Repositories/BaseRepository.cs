@@ -7,10 +7,10 @@ namespace Vylex.Data.Repositories;
 
 public class BaseRepository<T> : IRepository<T> where T : BaseEntity
 {
-    protected readonly ContextBase _context;
+    protected readonly ContextoBase _context;
     private DbSet<T> _dataset;
 
-    public BaseRepository(ContextBase context)
+    public BaseRepository(ContextoBase context)
     {
         _context = context;
         _dataset = _context.Set<T>();
@@ -78,7 +78,7 @@ public class BaseRepository<T> : IRepository<T> where T : BaseEntity
         }
     }
 
-    public async Task<T> UpdateAsync(T item)
+    public async Task<T> UpdateAsync(int id, T item)
     {
         try
         {
