@@ -1,6 +1,8 @@
 ﻿using Microsoft.Extensions.DependencyInjection;
+using Vylex.CrossCutting.Erros;
 using Vylex.Data.Context;
 using Vylex.Data.Repositories;
+using Vylex.Domain.Common;
 using Vylex.Domain.Interfaces.Repositories;
 using Vylex.Domain.Interfaces.Services;
 using Vylex.Service.Services;
@@ -29,6 +31,8 @@ public static class ConfigureServices
         services.AddScoped<IEvaluetionRepository, EvaluetionRepository>();
 
         services.AddScoped<ContextoBase>();
+
+        services.AddScoped<IHttpException, HttpException>();
 
     }
 }

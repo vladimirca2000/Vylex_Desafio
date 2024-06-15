@@ -15,6 +15,10 @@ public class CourseController : ControllerBase
         _courseService = courseService;
     }
 
+    /// <summary>
+    /// Busca todos os cursos cadastrados no sistema
+    /// </summary>
+    /// <returns>Lista de CursoDtoResult</returns>
     [HttpGet]
     public async Task<ActionResult> Get()
     {
