@@ -1,4 +1,6 @@
 ﻿using AutoMapper;
+using System.Net;
+using Vylex.Domain.Common;
 using Vylex.Domain.DTOs;
 using Vylex.Domain.Entities;
 using Vylex.Domain.Interfaces.Repositories;
@@ -15,28 +17,54 @@ public class EvaluetionService : IEvaluetionService
         _repository = repository;
         _mapper = mapper;
     }
-    public Task AddEvaluetionAsync(EvaluetionDtoCreate evaluetion)
+    public async Task<EvaluetionDtoResult> AddEvaluetionAsync(EvaluetionDtoCreate evaluetion)
     {
-        return _repository.InsertAsync(_mapper.Map<Evaluetions>(evaluetion));
+        var EvaluetionResult = _mapper.Map<Evaluetions>(evaluetion);
+        var result = await _repository.InsertAsync(EvaluetionResult);
+        if (result == null)
+        {
+            throw new HttpException(HttpStatusCode.BadRequest, "Evaluetion not inserted");
+        }
+        return _mapper.Map<EvaluetionDtoResult>(result);
     }
 
-    public Task DeleteEvaluetionAsync(int id)
+    public async Task<bool> DeleteEvaluetionAsync(int id)
     {
-        return _repository.DeleteAsync(id);
+        var testeEvaluetion = await _repository.ExistAsync(id);
+        if(!testeEvaluetion)
+        {
+            throw new HttpException(HttpStatusCode.NotFound, "Evaluetion not found");
+        }
+        return testeEvaluetion;
     }
 
-    public Task<EvaluetionDtoResult> GetEvaluetionByIdAsync(int id)
+    public async Task<EvaluetionDtoResult> GetEvaluetionByIdAsync(int id)
     {
-        return _repository.SelectAsync(id).ContinueWith(task => _mapper.Map<EvaluetionDtoResult>(task.Result));
+        var evaluetionResult = await _repository.SelectAsync(id);
+        if (evaluetionResult == null)
+        {
+            throw new HttpException(HttpStatusCode.NotFound, "Evaluetion not found");
+        }
+        return _mapper.Map<EvaluetionDtoResult>(evaluetionResult);
     }
 
-    public Task<IEnumerable<EvaluetionDtoResult>> GetEvaluetionsAsync()
+    public async Task<IEnumerable<EvaluetionDtoResult>> GetEvaluetionsAsync()
     {
-        return _repository.SelectAllAsync().ContinueWith(task => _mapper.Map<IEnumerable<EvaluetionDtoResult>>(task.Result));
+        var listEvaluetionResult = await _repository.SelectAllAsync();
+        if (listEvaluetionResult == null)
+        {
+            throw new HttpException(HttpStatusCode.NotFound, "Evaluetion not found");
+        }
+        return _mapper.Map<IEnumerable<EvaluetionDtoResult>>(listEvaluetionResult);
     }
 
-    public Task UpdateEvaluetionAsync(int id, EvaluetionDtoUpdate evaluetion)
+    public async Task<EvaluetionDtoResult> UpdateEvaluetionAsync(int id, EvaluetionDtoUpdate evaluetion)
     {
-        return _repository.UpdateAsync(id, _mapper.Map<Evaluetions>(evaluetion));
+        var evaluetionResult = await _repository.UpdateAsync(id, _mapper.Map<Evaluetions>(evaluetion));
+        if (evaluetionResult == null)
+        {
+            throw new HttpException(HttpStatusCode.NotFound, "Evaluetion not found, not updated");
+        }
+        return _mapper.Map<EvaluetionDtoResult>(evaluetionResult);
     }
 }

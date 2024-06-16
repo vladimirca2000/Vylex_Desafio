@@ -1,5 +1,7 @@
 ﻿
 using AutoMapper;
+using System.Net;
+using Vylex.Domain.Common;
 using Vylex.Domain.DTOs;
 using Vylex.Domain.Entities;
 using Vylex.Domain.Interfaces.Repositories;
@@ -10,36 +12,64 @@ namespace Vylex.Service.Services;
 public class StudentService : IStudentService
 {
     private readonly IRepository<Students> _repository;
+    private readonly IEvaluetionRepository _evaluetionRepository;
     private readonly IMapper _mapper;
 
-    public StudentService(IRepository<Students> repository, IMapper mapper)
+    public StudentService(IRepository<Students> repository, IEvaluetionRepository evaluetionRepository, IMapper mapper)
     {
         _repository = repository;
+        _evaluetionRepository = evaluetionRepository;
         _mapper = mapper;
     }
 
-    public Task AddStudentAsync(StudentDtoCreate student)
+    public async Task<StudentDtoResult> AddStudentAsync(StudentDtoCreate student)
     {
-        return _repository.InsertAsync(_mapper.Map<Students>(student));
+        var studentResult = _mapper.Map<Students>(student);
+        var result = await _repository.InsertAsync(studentResult);
+        if (result != null)
+        {
+            throw new HttpException(HttpStatusCode.BadRequest, "Student not inserted");
+        }
+        return _mapper.Map<StudentDtoResult>(result);
     }
 
-    public Task DeleteStudentAsync(int id)
+    public async Task<bool> DeleteStudentAsync(int id)
     {
-        return _repository.DeleteAsync(id);
+        var testeStudent = await _evaluetionRepository.ExistStudentAsync(id);
+        if(testeStudent)
+        {
+            throw new HttpException(HttpStatusCode.ResetContent, "Student has evaluations");
+        }
+        return await _repository.DeleteAsync(id);
     }
 
-    public Task<StudentDtoResult> GetStudentByIdAsync(int id)
+    public async Task<StudentDtoResult> GetStudentByIdAsync(int id)
     {
-        return _repository.SelectAsync(id).ContinueWith(task => _mapper.Map<StudentDtoResult>(task.Result));
+        var studentResult = await _repository.SelectAsync(id);
+        if (studentResult == null)
+        {
+            throw new HttpException(HttpStatusCode.NotFound, "Student not found");
+        }
+        return _mapper.Map<StudentDtoResult>(studentResult);
     }
 
-    public Task<IEnumerable<StudentDtoResult>> GetStudentsAsync()
+    public async Task<IEnumerable<StudentDtoResult>> GetStudentsAsync()
     {
-        return _repository.SelectAllAsync().ContinueWith(task => _mapper.Map<IEnumerable<StudentDtoResult>>(task.Result));
+        var listStudentResult = await _repository.SelectAllAsync();
+        if (listStudentResult == null)
+        {
+            throw new HttpException(HttpStatusCode.NotFound, "Student not found");
+        }
+        return _mapper.Map<IEnumerable<StudentDtoResult>>(listStudentResult);
     }
 
-    public Task UpdateStudentAsync(int id, StudentDtoUpdate student)
+    public async Task<StudentDtoResult> UpdateStudentAsync(int id, StudentDtoUpdate student)
     {
-        return _repository.UpdateAsync(id, _mapper.Map<Students>(student));
+        var studentResult = await _repository.SelectAsync(id);
+        if (studentResult == null)
+        {
+            throw new HttpException(HttpStatusCode.NotFound, "Student not found");
+        }
+        return _mapper.Map<StudentDtoResult>(studentResult);
     }
 }

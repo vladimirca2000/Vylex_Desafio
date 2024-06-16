@@ -1,5 +1,3 @@
-using Microsoft.AspNetCore.Builder;
-using Vylex.CrossCutting.DependencyInjection;
 using Vylex.Data.Context;
 using Vylex.WebAPI.Configurations;
 

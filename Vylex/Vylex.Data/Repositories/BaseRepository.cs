@@ -39,7 +39,7 @@ public class BaseRepository<T> : IRepository<T> where T : BaseEntity
         return await _dataset.AnyAsync(P => P.Id.Equals(id));
     }
 
-    public async Task<T> InsertAsync(T item)
+    public async Task<T?> InsertAsync(T item)
     {
         try
         {
@@ -54,11 +54,12 @@ public class BaseRepository<T> : IRepository<T> where T : BaseEntity
         return item;
     }
 
-    public async Task<T> SelectAsync(int id)
+    public async Task<T?> SelectAsync(int id)
     {
         try
         {
-            return await _dataset.SingleOrDefaultAsync(x => x.Id.Equals(id));
+            var result = await _dataset.SingleOrDefaultAsync(p => p.Id.Equals(id));
+            return result;
         }
         catch (Exception ex)
         {
@@ -78,7 +79,7 @@ public class BaseRepository<T> : IRepository<T> where T : BaseEntity
         }
     }
 
-    public async Task<T> UpdateAsync(int id, T item)
+    public async Task<T?> UpdateAsync(int id, T item)
     {
         try
         {

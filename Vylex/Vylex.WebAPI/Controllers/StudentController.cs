@@ -46,7 +46,11 @@ public class StudentController : ControllerBase
     [HttpDelete("{id}")]
     public async Task<ActionResult> Delete(int id)
     {
-        await _studentService.DeleteStudentAsync(id);
+        var result = await _studentService.DeleteStudentAsync(id);
+        if (!result)
+        {
+            return NotFound();
+        }
         return Ok();
     }
 }

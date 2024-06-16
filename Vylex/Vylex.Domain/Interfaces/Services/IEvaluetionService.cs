@@ -6,7 +6,7 @@ public interface IEvaluetionService
 {
     Task<IEnumerable<EvaluetionDtoResult>> GetEvaluetionsAsync();
     Task<EvaluetionDtoResult> GetEvaluetionByIdAsync(int id);
-    Task AddEvaluetionAsync(EvaluetionDtoCreate evaluetion);
-    Task UpdateEvaluetionAsync(int id, EvaluetionDtoUpdate evaluetion);
-    Task DeleteEvaluetionAsync(int id);
+    Task<EvaluetionDtoResult> AddEvaluetionAsync(EvaluetionDtoCreate evaluetion);
+    Task<EvaluetionDtoResult> UpdateEvaluetionAsync(int id, EvaluetionDtoUpdate evaluetion);
+    Task<bool> DeleteEvaluetionAsync(int id);
 }

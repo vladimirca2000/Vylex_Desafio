@@ -1,5 +1,6 @@
 ﻿using Microsoft.OpenApi.Models;
 
+
 namespace Vylex.WebAPI.Configurations;
 
 public static class SwaggerConfig
@@ -12,11 +13,20 @@ public static class SwaggerConfig
         {
             s.SwaggerDoc("v1", new OpenApiInfo
             {
-                Version = "v1",
+                Version = "version 1",
                 Title = "Test to Vylex",
                 Description = "Vylex API Swagger - Test",
-                Contact = new OpenApiContact { Name = "Vladimir Alves", Email = "vladimirca2000@gmail.com", Url = new Uri("http://www.vladimir.eti.br") },
-                License = new OpenApiLicense { Name = "GITHUB", Url = new Uri("https://github.com/vladimirca2000/Vylex_Desafio") }
+                Contact = new OpenApiContact 
+                { 
+                    Name = "Vladimir Alves", 
+                    Email = "vladimirca2000@gmail.com", 
+                    Url = new Uri("http://www.vladimir.eti.br")
+                },
+                License = new OpenApiLicense()
+                {
+                    Name = "MIT",
+                    Url = new Uri("https://opensource.org/licenses/MIT")
+                }
             });
 
             s.AddSecurityDefinition("Bearer", new OpenApiSecurityScheme
@@ -53,7 +63,7 @@ public static class SwaggerConfig
         app.UseSwagger();
         app.UseSwaggerUI(c =>
         {
-            c.SwaggerEndpoint("/swagger/v1/swagger.json", "v1");
+            c.SwaggerEndpoint("/swagger/v1/swagger.json", "v1");            
         });
     }
 }

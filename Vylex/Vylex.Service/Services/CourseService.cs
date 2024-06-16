@@ -1,6 +1,5 @@
 ﻿using AutoMapper;
 using System.Net;
-using System.Net.Mail;
 using Vylex.Domain.Common;
 using Vylex.Domain.DTOs;
 using Vylex.Domain.Entities;
@@ -22,43 +21,59 @@ public class CourseService : ICourseService
         _mapper = mapper;
     }
 
-    public Task AddCourseAsync(CourseDtoCreate course)
+    public async Task<CourseDtoResult> AddCourseAsync(CourseDtoCreate course)
     {
-        return _courseRepository.InsertAsync(_mapper.Map<Courses>(course));
+        var courseResult = _mapper.Map<Courses>(course);
+        var result = await _courseRepository.InsertAsync(courseResult);
+        if (result != null)
+        {
+            throw new HttpException(HttpStatusCode.BadRequest, "Course not inserted");
+        }
+
+        return _mapper.Map<CourseDtoResult>(result);
     }
 
     public async Task<bool> DeleteCourseAsync(int id)
     {
         var testeCourse = await _evaluetionRepository.ExistCourseAsync(id);
-        var testeStudent = await _evaluetionRepository.ExistStudentAsync(id);
 
         if(testeCourse)
         {
             throw new HttpException(HttpStatusCode.ResetContent, "Course has evaluations");
         }
 
-        if(testeStudent)
+        return await _courseRepository.DeleteAsync(id);
+    }
+
+    public async Task<CourseDtoResult> GetCourseByIdAsync(int id)
+    {
+        var courseResult = await _courseRepository.SelectAsync(id);
+        if (courseResult == null)
         {
-            throw new HttpException(HttpStatusCode.ResetContent, "Student has evaluations");
+            throw new HttpException(HttpStatusCode.NotFound, "Course not found");
         }
-
-        var result = await _courseRepository.DeleteAsync(id);
-        
-        return result;
+        return _mapper.Map<CourseDtoResult>(courseResult);
     }
 
-    public Task<CourseDtoResult> GetCourseByIdAsync(int id)
+    public async Task<IEnumerable<CourseDtoResult>> GetCoursesAsync()
     {
-        return _courseRepository.SelectAsync(id).ContinueWith(task => _mapper.Map<CourseDtoResult>(task.Result));
+        var listCourseResult = await _courseRepository.SelectAllAsync();
+        if (listCourseResult == null)
+        {
+            throw new HttpException(HttpStatusCode.NotFound, "Courses not found");
+        }
+        return _mapper.Map<IEnumerable<CourseDtoResult>>(listCourseResult);
     }
 
-    public Task<IEnumerable<CourseDtoResult>> GetCoursesAsync()
+    public async Task<CourseDtoResult> UpdateCourseAsync(int id, CourseDtoUpdate course)
     {
-        return _courseRepository.SelectAllAsync().ContinueWith(task => _mapper.Map<IEnumerable<CourseDtoResult>>(task.Result));
+        var courseResult = await _courseRepository.UpdateAsync(id, _mapper.Map<Courses>(course));
+        if (courseResult == null)
+        {
+            throw new HttpException(HttpStatusCode.NotFound, "Course not found, not updated");
+        }
+        return _mapper.Map<CourseDtoResult>(courseResult);
     }
 
-    public Task UpdateCourseAsync(int id, CourseDtoUpdate course)
-    {
-        return _courseRepository.UpdateAsync(id, _mapper.Map<Courses>(course));
-    }
+    
 }
