@@ -21,16 +21,15 @@ public class CourseService : ICourseService
         _mapper = mapper;
     }
 
-    public async Task<CourseDtoResult> AddCourseAsync(CourseDtoCreate course)
+    public async Task<CourseDtoResult?> AddCourseAsync(CourseDtoCreate course)
     {
-        var courseResult = _mapper.Map<Courses>(course);
-        var result = await _courseRepository.InsertAsync(courseResult);
-        if (result != null)
+        if (!await _courseRepository.ExistCourseAsync(course.CourseName))
         {
-            throw new HttpException(HttpStatusCode.BadRequest, "Course not inserted");
+            var courseResult = _mapper.Map<Courses>(course);
+            var result = await _courseRepository.InsertAsync(courseResult);
+            return result != null ? _mapper.Map<CourseDtoResult>(result) : null;
         }
-
-        return _mapper.Map<CourseDtoResult>(result);
+        return null;
     }
 
     public async Task<bool> DeleteCourseAsync(int id)
@@ -48,6 +47,7 @@ public class CourseService : ICourseService
     public async Task<CourseDtoResult> GetCourseByIdAsync(int id)
     {
         var courseResult = await _courseRepository.SelectAsync(id);
+
         if (courseResult == null)
         {
             throw new HttpException(HttpStatusCode.NotFound, "Course not found");

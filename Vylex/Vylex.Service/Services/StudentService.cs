@@ -26,7 +26,7 @@ public class StudentService : IStudentService
     {
         var studentResult = _mapper.Map<Students>(student);
         var result = await _repository.InsertAsync(studentResult);
-        if (result != null)
+        if (result == null)
         {
             throw new HttpException(HttpStatusCode.BadRequest, "Student not inserted");
         }

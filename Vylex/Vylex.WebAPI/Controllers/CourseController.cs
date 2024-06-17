@@ -1,4 +1,5 @@
 ﻿using Microsoft.AspNetCore.Mvc;
+using System.Net;
 using Vylex.Domain.DTOs;
 using Vylex.Domain.Interfaces.Services;
 
@@ -34,15 +35,23 @@ public class CourseController : ControllerBase
     }
 
     [HttpPost]
+    [ProducesResponseType(StatusCodes.Status201Created)]
+    [ProducesResponseType(StatusCodes.Status400BadRequest)]
     public async Task<ActionResult> Post([FromBody] CourseDtoCreate course)
     {
-        await _courseService.AddCourseAsync(course);
-        return Ok();
+        if(ModelState.IsValid)
+            return BadRequest(ModelState);
+
+        var result = await _courseService.AddCourseAsync(course);
+        return result != null ? Created(string.Empty, result) : BadRequest();
     }
 
     [HttpPut("{id}")]
     public async Task<ActionResult> Put(int id, [FromBody] CourseDtoUpdate course)
     {
+        if(ModelState.IsValid)
+            return BadRequest(ModelState);
+
         await _courseService.UpdateCourseAsync(id, course);
         return Ok();
     }

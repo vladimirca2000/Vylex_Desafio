@@ -12,4 +12,9 @@ public class CourseRepository : BaseRepository<Courses>, ICourseRepositoty
     {
         _dataset = context.Set<Courses>();
     }
+
+    public async Task<bool> ExistCourseAsync(string courseName)
+    {
+        return await _dataset.AnyAsync(P => P.CourseName.Equals(courseName));
+    }
 }

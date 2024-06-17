@@ -36,11 +36,11 @@ builder.Services.AddSwaggerConfiguration();
 
 var app = builder.Build();
 
-using (var scope = app.Services.CreateScope())
-{
-    using var context = scope.ServiceProvider.GetRequiredService<ContextoBase>();
-    context.Database.EnsureCreated();
-}
+//using (var scope = app.Services.CreateScope())
+//{
+//    using var context = scope.ServiceProvider.GetRequiredService<ContextoBase>();
+//    context.Database.EnsureCreated();
+//}
 
 app.UseRouting();
 
