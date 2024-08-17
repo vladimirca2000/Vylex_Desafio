@@ -1,3 +1,10 @@
 # Vylex_Desafio
 
-## Não concluído
+## Aplique as Migrations
+
+``` csharp
+Update-Database
+```
+
+
+## Não concluído - Revisando
