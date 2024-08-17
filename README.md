@@ -1,4 +1,4 @@
-# Vylex_Desafio
+# Vylex Desafio
 
 Criar API Rest com documentação no swagger.
 Teste para vaga de desenvolvedor back-end
@@ -15,3 +15,5 @@ Update-Database
 
 
 ## Não concluído - Revisando
+
+Iniciando a revisão dia 17/08/2024 as 18:48
