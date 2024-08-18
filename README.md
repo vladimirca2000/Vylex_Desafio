@@ -16,7 +16,7 @@ Abra o **_Package Manage Console_** e digite o comando:
 Update-Database
 ```
 
-> ## Importante
+## Importante
 > Banco de dados **_MySql 8_**
 > Image DockerHub : **_mysql:8.0_**
 
