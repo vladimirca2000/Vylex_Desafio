@@ -17,7 +17,9 @@ Update-Database
 ```
 
 > ## Importante
->  Banco de dados **_MySql 8_**
+> Banco de dados **_MySql 8_**
+> Image DockerHub : **_mysql:8.0_**
+
 
 ---
 ## Não concluído - Revisando
