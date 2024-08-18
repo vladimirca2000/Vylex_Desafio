@@ -10,7 +10,7 @@ Verifique a *[branch de desenvolvimento](https://github.com/vladimirca2000/Vylex
 
 ## Aplique as Migrations
 
-Abra o Package Manage Console e digite o comando:
+Abra o **_Package Manage Console_** e digite o comando:
 
 ``` csharp
 Update-Database
@@ -19,12 +19,13 @@ Update-Database
 > ## Importante
 >  Banco de dados **_MySql 8_**
 
+---
 ## Não concluído - Revisando
 
 * Iniciando a revisão dia 17/08/2024 as 18:48
-* Clonado repositório do GitHub
-* Instalação do Mysql no docker e efetuado a Migração 
-* Teste Cursos e Inicio revisão Estudante
+    * Clonado repositório do GitHub
+    * Instalação do Mysql no docker e efetuado a Migração 
+    * Teste Cursos e Inicio revisão Estudante
  
 
 
