@@ -12,4 +12,10 @@ public class StudentRepository : BaseRepository<Students>, IStudentRepository
     {
         _dataset = context.Set<Students>();
     }
+
+    
+    public async Task<bool> ExistEmailAsync(string email)
+    {
+        return await _dataset.AnyAsync(S => S.Email.Equals(email));
+    }
 }

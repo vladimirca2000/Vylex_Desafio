@@ -30,10 +30,15 @@ public class StudentController : ControllerBase
     }
 
     [HttpPost]
+    [ProducesResponseType(StatusCodes.Status201Created)]
+    [ProducesResponseType(StatusCodes.Status400BadRequest)]
     public async Task<ActionResult> Post([FromBody] StudentDtoCreate student)
     {
-        await _studentService.AddStudentAsync(student);
-        return Ok();
+        if (!ModelState.IsValid)
+            return BadRequest(ModelState);
+
+        var result = await _studentService.AddStudentAsync(student);
+        return result != null ? Created(string.Empty, result) : BadRequest();
     }
 
     [HttpPut("{id}")]
@@ -48,9 +53,8 @@ public class StudentController : ControllerBase
     {
         var result = await _studentService.DeleteStudentAsync(id);
         if (!result)
-        {
             return NotFound();
-        }
+
         return Ok();
     }
 }

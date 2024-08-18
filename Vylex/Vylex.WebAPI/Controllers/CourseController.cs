@@ -39,7 +39,7 @@ public class CourseController : ControllerBase
     [ProducesResponseType(StatusCodes.Status400BadRequest)]
     public async Task<ActionResult> Post([FromBody] CourseDtoCreate course)
     {
-        if(ModelState.IsValid)
+        if(!ModelState.IsValid)
             return BadRequest(ModelState);
 
         var result = await _courseService.AddCourseAsync(course);
@@ -49,7 +49,7 @@ public class CourseController : ControllerBase
     [HttpPut("{id}")]
     public async Task<ActionResult> Put(int id, [FromBody] CourseDtoUpdate course)
     {
-        if(ModelState.IsValid)
+        if(!ModelState.IsValid)
             return BadRequest(ModelState);
 
         await _courseService.UpdateCourseAsync(id, course);
