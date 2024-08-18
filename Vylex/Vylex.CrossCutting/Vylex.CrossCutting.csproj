@@ -8,11 +8,15 @@
 
   <ItemGroup>
     <PackageReference Include="AutoMapper" Version="13.0.1" />
+    <PackageReference Include="AutoMapper.Extensions.Microsoft.DependencyInjection" Version="12.0.0" />
+    <PackageReference Include="Microsoft.EntityFrameworkCore" Version="6.0.31" />
+    <PackageReference Include="Microsoft.Extensions.DependencyInjection" Version="6.0.1" />
   </ItemGroup>
 
   <ItemGroup>
     <ProjectReference Include="..\Vylex.Data\Vylex.Data.csproj" />
     <ProjectReference Include="..\Vylex.Domain\Vylex.Domain.csproj" />
+    <ProjectReference Include="..\Vylex.Service\Vylex.Service.csproj" />
   </ItemGroup>
 
 </Project>
