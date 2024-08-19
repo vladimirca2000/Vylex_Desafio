@@ -15,6 +15,26 @@ public class CourseRepository : BaseRepository<Courses>, ICourseRepositoty
 
     public async Task<bool> ExistCourseAsync(string courseName)
     {
-        return await _dataset.AnyAsync(P => P.CourseName.Equals(courseName));
+        try
+        {
+            return await _dataset.AnyAsync(P => P.CourseName.Equals(courseName));
+        }
+        catch (Exception)
+        {
+            throw new Exception("Error in the database");
+        }
+        
+    }
+
+    public async Task<Courses?> SelectCourseNomeAsync(string courseName)
+    {
+        try
+        {
+            return await _dataset.SingleOrDefaultAsync(c => c.CourseName.Equals(courseName));
+        }
+        catch (Exception)
+        {
+            throw new Exception("Error in the database");
+        }
     }
 }

@@ -1,6 +1,6 @@
 ﻿using System.Net;
 
-namespace Vylex.Domain.Common;
+namespace Vylex.Domain.DTOs.Base;
 
 public class HttpException : Exception
 {

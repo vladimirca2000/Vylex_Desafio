@@ -16,6 +16,26 @@ public class StudentRepository : BaseRepository<Students>, IStudentRepository
     
     public async Task<bool> ExistEmailAsync(string email)
     {
-        return await _dataset.AnyAsync(S => S.Email.Equals(email));
+        try
+        {
+            return await _dataset.AnyAsync(S => S.Email.Equals(email));
+        }
+        catch (Exception)
+        {
+            throw new Exception("Error in the database");
+        }
+        
+    }
+
+    public async Task<Students?> SelectStudentEmailAsync(string email)
+    {
+        try
+        {
+            return await _dataset.SingleOrDefaultAsync(s => s.Email.Equals(email));
+        }
+        catch (Exception)
+        {
+            throw new Exception("Error in the database");
+        }
     }
 }

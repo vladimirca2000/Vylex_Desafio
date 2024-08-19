@@ -15,11 +15,49 @@ public class EvaluetionRepository : BaseRepository<Evaluetions>, IEvaluetionRepo
 
     public async Task<bool> ExistCourseAsync(int id)
     {
-        return await _dataset.AnyAsync(P => P.CourseId.Equals(id));
+        try
+        {
+            return await _dataset.AnyAsync(e => e.CourseId.Equals(id));
+        }
+        catch (Exception)
+        {
+            throw new Exception("Error in the database");
+        }
+    }
+
+    public async Task<bool> ExistEvaluetionAsync(int courseId, int studentId)
+    {
+        try
+        {
+            return await _dataset.AnyAsync(e => e.StudentId.Equals(studentId) && e.CourseId.Equals(courseId));
+        }
+        catch (Exception)
+        {
+            throw new Exception("Error in the database");
+        }
     }
 
     public async Task<bool> ExistStudentAsync(int id)
     {
-        return await _dataset.AnyAsync(P => P.StudentId.Equals(id));
+        try
+        {
+            return await _dataset.AnyAsync(e => e.StudentId.Equals(id));
+        }
+        catch (Exception)
+        {
+            throw new Exception("Error in the database");
+        }
+    }
+
+    public async Task<Evaluetions?> SelectEvaluationCouseStudante(int courseId, int studentId)
+    {
+        try
+        {
+            return await _dataset.SingleOrDefaultAsync(e => e.CourseId.Equals(courseId) && e.StudentId.Equals(studentId));
+        }
+        catch (Exception)
+        {
+            throw new Exception("Error in the database");
+        }
     }
 }

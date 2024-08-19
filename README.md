@@ -22,12 +22,18 @@ Update-Database
 
 
 ---
-## Não concluído - Revisando
+### Não concluído - Revisando
 
 * Iniciando a revisão dia 17/08/2024 as 18:48
     * Clonado repositório do GitHub
     * Instalação do Mysql no docker e efetuado a Migração 
     * Teste Cursos e Inicio revisão Estudante
+* Domingo 18/08/2024 iniciado a correção das respostas http as 15:30
+    * Ajustado a controller e dto's para retorno de mensagem Http    
+    * Ajustado as avaliações
+* Segunda 19/08/2024 - Testando Estudantes e Avaliações as 08:48
+    * Cria do a controller de curso e avalições
+
  
 
 

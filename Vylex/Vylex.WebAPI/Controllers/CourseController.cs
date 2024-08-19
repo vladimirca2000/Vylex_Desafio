@@ -1,6 +1,6 @@
 ﻿using Microsoft.AspNetCore.Mvc;
-using System.Net;
 using Vylex.Domain.DTOs;
+using Vylex.Domain.DTOs.Base;
 using Vylex.Domain.Interfaces.Services;
 
 namespace Vylex.WebAPI.Controllers;
@@ -21,45 +21,115 @@ public class CourseController : ControllerBase
     /// </summary>
     /// <returns>Lista de CursoDtoResult</returns>
     [HttpGet]
+    [ProducesResponseType(StatusCodes.Status200OK)]
+    [ProducesResponseType(StatusCodes.Status404NotFound)]
     public async Task<ActionResult> Get()
     {
-        var courses = await _courseService.GetCoursesAsync();
-        return Ok(courses);
+        try
+        {
+            var courses = await _courseService.GetCoursesAsync();
+            return Ok(courses);
+        }
+        catch (HttpException ex)
+        {
+            return StatusCode((int)ex.StatusCode, ex.Message);
+        }
+
     }
 
+    /// <summary>
+    /// Busca o cursos cadastrado no sistema pelo Id
+    /// </summary>
+    /// <returns>Objeto CursoDtoResult</returns>
     [HttpGet("{id}")]
+    [ProducesResponseType(StatusCodes.Status200OK)]
+    [ProducesResponseType(StatusCodes.Status404NotFound)]
     public async Task<ActionResult> Get(int id)
     {
-        var course = await _courseService.GetCourseByIdAsync(id);
-        return Ok(course);
+        try
+        {
+            var course = await _courseService.GetCourseByIdAsync(id);
+            return Ok(course);
+        }
+        catch (HttpException ex)
+        {
+            return StatusCode((int)ex.StatusCode, ex.Message);
+        }
+
     }
 
+    /// <summary>
+    /// Adiciona um cursos no sistema - CourseDtoCreate
+    /// </summary>
+    /// <returns>Objeto CursoDtoResult</returns>
     [HttpPost]
     [ProducesResponseType(StatusCodes.Status201Created)]
     [ProducesResponseType(StatusCodes.Status400BadRequest)]
+    [ProducesResponseType(StatusCodes.Status409Conflict)]
     public async Task<ActionResult> Post([FromBody] CourseDtoCreate course)
     {
-        if(!ModelState.IsValid)
-            return BadRequest(ModelState);
+        try
+        {
+            if (!ModelState.IsValid)
+                return BadRequest(ModelState);
 
-        var result = await _courseService.AddCourseAsync(course);
-        return result != null ? Created(string.Empty, result) : BadRequest();
+            var result = await _courseService.AddCourseAsync(course);
+            return result != null ? Created(string.Empty, result) : BadRequest();
+        }
+        catch (HttpException ex)
+        {
+            return StatusCode((int)ex.StatusCode, ex.Message);
+        }
+
     }
 
+    /// <summary>
+    /// Atualiza um cursos no sistema - CourseDtoUpdate
+    /// </summary>
+    /// <returns>Objeto CursoDtoResult</returns>
     [HttpPut("{id}")]
+    [ProducesResponseType(StatusCodes.Status200OK)]
+    [ProducesResponseType(StatusCodes.Status400BadRequest)]
+    [ProducesResponseType(StatusCodes.Status406NotAcceptable)]
+    [ProducesResponseType(StatusCodes.Status409Conflict)]
     public async Task<ActionResult> Put(int id, [FromBody] CourseDtoUpdate course)
     {
-        if(!ModelState.IsValid)
-            return BadRequest(ModelState);
+        try
+        {
+            if (!ModelState.IsValid)
+                return BadRequest(ModelState);
 
-        await _courseService.UpdateCourseAsync(id, course);
-        return Ok();
+            var result = await _courseService.UpdateCourseAsync(id, course);
+            return Ok(result);
+        }
+        catch (HttpException ex)
+        {
+            return StatusCode((int)ex.StatusCode, ex.Message);
+        }
+
     }
 
+    /// <summary>
+    /// Excluir um cursos no sistema - Id
+    /// </summary>
+    /// <returns>String</returns>
     [HttpDelete("{id}")]
+    [ProducesResponseType(StatusCodes.Status200OK)]
+    [ProducesResponseType(StatusCodes.Status404NotFound)]
+    [ProducesResponseType(StatusCodes.Status409Conflict)]
     public async Task<ActionResult> Delete(int id)
     {
-        await _courseService.DeleteCourseAsync(id);
-        return Ok();
+        try
+        {
+            if (await _courseService.DeleteCourseAsync(id))
+                return Ok("Course deleted");
+
+            return NotFound("Course not found");
+        }
+        catch (HttpException ex)
+        {
+            return StatusCode((int)ex.StatusCode, ex.Message);
+        }
+
     }
 }
