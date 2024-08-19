@@ -1,4 +1,4 @@
-﻿using Microsoft.EntityFrameworkCore;
+using Microsoft.EntityFrameworkCore;
 using Vylex.Data.Context;
 using Vylex.Domain.Entities;
 using Vylex.Domain.Interfaces.Repositories;

@@ -12,8 +12,7 @@ public class StudentRepository : BaseRepository<Students>, IStudentRepository
     {
         _dataset = context.Set<Students>();
     }
-
-    
+        
     public async Task<bool> ExistEmailAsync(string email)
     {
         try
@@ -24,7 +23,6 @@ public class StudentRepository : BaseRepository<Students>, IStudentRepository
         {
             throw new Exception("Error in the database");
         }
-        
     }
 
     public async Task<Students?> SelectStudentEmailAsync(string email)

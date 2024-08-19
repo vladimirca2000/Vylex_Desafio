@@ -1,4 +1,4 @@
-﻿using Microsoft.AspNetCore.Mvc;
+using Microsoft.AspNetCore.Mvc;
 using Vylex.Domain.DTOs;
 using Vylex.Domain.DTOs.Base;
 using Vylex.Domain.Entities;
@@ -132,3 +132,4 @@ public class EvaluetionController : ControllerBase
     }
 
 }
+

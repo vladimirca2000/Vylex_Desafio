@@ -1,4 +1,4 @@
-﻿using AutoMapper;
+using AutoMapper;
 using System.Net;
 using Vylex.Data.Repositories;
 using Vylex.Domain.DTOs;

@@ -1,4 +1,4 @@
-﻿using Microsoft.AspNetCore.Mvc;
+using Microsoft.AspNetCore.Mvc;
 using Vylex.Domain.DTOs;
 using Vylex.Domain.DTOs.Base;
 using Vylex.Domain.Interfaces.Services;
@@ -133,3 +133,4 @@ public class CourseController : ControllerBase
 
     }
 }
+
