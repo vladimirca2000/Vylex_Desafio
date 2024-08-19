@@ -1,7 +1,6 @@
 # Vylex Desafio
 
-## Em Desenvolvimento
-=======
+## Para Analise
 
 Criar API Rest com documentação no swagger.
 Teste para vaga de desenvolvedor back-end
@@ -17,19 +16,10 @@ Update-Database
 ```
 
 
-## Não concluído - Revisando
-
-Iniciando a revisão dia 17/08/2024 as 18:48
-=======
-# Vylex_Desafio
-
-
-Criar API Rest com documentação no swagger.
-Teste para vaga de desenvolvedor back-end
-
-Verifique a *[branch de desenvolvimento](https://github.com/vladimirca2000/Vylex_Desafio/tree/Feature/Desafio/Vylex)*
-
-## Não utilize a branck Master
+### Concluído - Revisado
+> ### Não utilize a branck Master
+>
+> Verifique a *[branch de desenvolvimento](https://github.com/vladimirca2000/Vylex_Desafio/tree/Feature/Desafio/Vylex)*
 
 
 ## Aplique as Migrations
@@ -42,11 +32,12 @@ Update-Database
 
 ## Importante
 > Banco de dados **_MySql 8_**
+> 
 > Image DockerHub : **_mysql:8.0_**
 
 
 ---
-### Não concluído - Revisando
+### Disponivel para analise
 
 * Iniciando a revisão dia 17/08/2024 as 18:48
     * Clonado repositório do GitHub
