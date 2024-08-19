@@ -9,7 +9,7 @@ public class StudentDtoUpdate
 
     [Required(ErrorMessage = "The name of the student is required.")]
     [StringLength(30, MinimumLength = 5, ErrorMessage = "The name of the study must be between 5 and 30 letters")]
-    public string Name { get; set; }
+    public string StudentName { get; set; }
 
     [Required(ErrorMessage = "The email of the student is required.")]
     [EmailAddress(ErrorMessage = "The email is invalid.")]
