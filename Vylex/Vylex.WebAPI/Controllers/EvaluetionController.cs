@@ -1,3 +1,4 @@
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Vylex.Domain.DTOs;
 using Vylex.Domain.DTOs.Base;
@@ -24,6 +25,7 @@ public class EvaluetionController : ControllerBase
     /// </summary>
     /// <returns>Lista de AvaliaçõesDtoResult</returns>
     [HttpGet]
+    [Authorize]
     [ProducesResponseType(StatusCodes.Status200OK)]
     [ProducesResponseType(StatusCodes.Status404NotFound)]
     public async Task<ActionResult> Get()
@@ -44,6 +46,7 @@ public class EvaluetionController : ControllerBase
     /// </summary>
     /// <returns>Objeto EvaluetionDtoResult</returns>
     [HttpGet("{id}")]
+    [Authorize]
     [ProducesResponseType(StatusCodes.Status200OK)]
     [ProducesResponseType(StatusCodes.Status404NotFound)]
     public async Task<ActionResult> Get(int id)
@@ -64,6 +67,7 @@ public class EvaluetionController : ControllerBase
     /// </summary>
     /// <returns>Objeto EvaluetionDtoResult</returns>
     [HttpPost]
+    [Authorize]
     [ProducesResponseType(StatusCodes.Status201Created)]
     [ProducesResponseType(StatusCodes.Status400BadRequest)]
     [ProducesResponseType(StatusCodes.Status409Conflict)]
@@ -88,6 +92,7 @@ public class EvaluetionController : ControllerBase
     /// </summary>
     /// <returns>Objeto EvaluetionDtoResult</returns>
     [HttpPut("{id}")]
+    [Authorize]
     [ProducesResponseType(StatusCodes.Status200OK)]
     [ProducesResponseType(StatusCodes.Status400BadRequest)]
     [ProducesResponseType(StatusCodes.Status406NotAcceptable)]
@@ -113,6 +118,7 @@ public class EvaluetionController : ControllerBase
     /// </summary>
     /// <returns>String</returns>
     [HttpDelete("{id}")]
+    [Authorize]
     [ProducesResponseType(StatusCodes.Status200OK)]
     [ProducesResponseType(StatusCodes.Status404NotFound)]
     [ProducesResponseType(StatusCodes.Status409Conflict)]

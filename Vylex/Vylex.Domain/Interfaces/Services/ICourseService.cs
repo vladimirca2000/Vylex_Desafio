@@ -10,4 +10,6 @@ public interface ICourseService
     Task<CourseDtoResult> UpdateCourseAsync(int id, CourseDtoUpdate course);
     Task<bool> DeleteCourseAsync(int id);
 
+    Task<IEnumerable<CourseEvaluationDtoResult>> GetCoursesEvaluationAsync();
+
 }

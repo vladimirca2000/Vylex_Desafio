@@ -49,6 +49,6 @@ public class EvaluetionMap : IEntityTypeConfiguration<Evaluetions>
                .WithMany(e => e.Evaluetions); ;
 
         builder.HasOne(c => c.Course)
-            .WithMany(e => e.Evaluetions);
+            .WithMany(e => e.ListEvaluetions);
     }
 }

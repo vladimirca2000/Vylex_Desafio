@@ -5,13 +5,13 @@ using Vylex.CrossCutting.DependencyInjection;
 
 namespace Vylex.WebAPI.Configurations;
 
-public static class DependencyInjectionConfig
+public static class JwtConfiguration
 {
 
-    public static void AddDependencyInjectionConfiguration(this IServiceCollection services, IConfiguration configuration)
+    public static void AddJwtConfiguration(this IServiceCollection services, IConfiguration configuration)
     {
         var key = Encoding.ASCII.GetBytes(configuration["Jwt:Key"]);
-        
+
 
         services.AddAuthentication(x =>
         {
@@ -24,7 +24,7 @@ public static class DependencyInjectionConfig
             x.SaveToken = true;
             x.TokenValidationParameters = new TokenValidationParameters
             {
-                
+
                 ValidateIssuerSigningKey = true,
                 ValidateLifetime = true,
                 ValidateIssuer = false,
@@ -36,6 +36,6 @@ public static class DependencyInjectionConfig
             };
         });
 
-        services.AddControllers();
+        ConfigureServices.AddServices(services);
     }
 }

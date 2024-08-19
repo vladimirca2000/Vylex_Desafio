@@ -10,4 +10,5 @@ public interface IRepository<T> where T : BaseEntity
     Task<T?> SelectAsync(int id);
     Task<IEnumerable<T>> SelectAllAsync();
     Task<bool> ExistAsync(int id);
+    
 }

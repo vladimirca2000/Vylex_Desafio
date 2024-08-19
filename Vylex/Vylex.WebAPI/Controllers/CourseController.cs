@@ -1,3 +1,4 @@
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Vylex.Domain.DTOs;
 using Vylex.Domain.DTOs.Base;
@@ -7,6 +8,7 @@ namespace Vylex.WebAPI.Controllers;
 
 [Route("api/[controller]")]
 [ApiController]
+[Authorize]
 public class CourseController : ControllerBase
 {
     private readonly ICourseService _courseService;
@@ -19,7 +21,7 @@ public class CourseController : ControllerBase
     /// <summary>
     /// Busca todos os cursos cadastrados no sistema
     /// </summary>
-    /// <returns>Lista de CursoDtoResult</returns>
+    /// <returns>Lista de CourseDtoResult</returns>
     [HttpGet]
     [ProducesResponseType(StatusCodes.Status200OK)]
     [ProducesResponseType(StatusCodes.Status404NotFound)]
@@ -40,7 +42,7 @@ public class CourseController : ControllerBase
     /// <summary>
     /// Busca o cursos cadastrado no sistema pelo Id
     /// </summary>
-    /// <returns>Objeto CursoDtoResult</returns>
+    /// <returns>Objeto CourseDtoResult</returns>
     [HttpGet("{id}")]
     [ProducesResponseType(StatusCodes.Status200OK)]
     [ProducesResponseType(StatusCodes.Status404NotFound)]
@@ -61,7 +63,7 @@ public class CourseController : ControllerBase
     /// <summary>
     /// Adiciona um cursos no sistema - CourseDtoCreate
     /// </summary>
-    /// <returns>Objeto CursoDtoResult</returns>
+    /// <returns>Objeto CourseDtoResult</returns>
     [HttpPost]
     [ProducesResponseType(StatusCodes.Status201Created)]
     [ProducesResponseType(StatusCodes.Status400BadRequest)]
@@ -86,7 +88,7 @@ public class CourseController : ControllerBase
     /// <summary>
     /// Atualiza um cursos no sistema - CourseDtoUpdate
     /// </summary>
-    /// <returns>Objeto CursoDtoResult</returns>
+    /// <returns>Objeto CourseDtoResult</returns>
     [HttpPut("{id}")]
     [ProducesResponseType(StatusCodes.Status200OK)]
     [ProducesResponseType(StatusCodes.Status400BadRequest)]
@@ -132,5 +134,28 @@ public class CourseController : ControllerBase
         }
 
     }
+
+    /// <summary>
+    /// Busca todos os cursos cadastrados no sistema Com suas Avaliações
+    /// </summary>
+    /// <returns>Lista de CourseDtoResult</returns>
+    [HttpGet, Route("CourseEvaluetion")]
+    [ProducesResponseType(StatusCodes.Status200OK)]
+    [ProducesResponseType(StatusCodes.Status404NotFound)]
+    public async Task<ActionResult> GetCourseEvaluation()
+    {
+        try
+        {
+            var coursesEvaluetion = await _courseService.GetCoursesEvaluationAsync();
+            return Ok(coursesEvaluetion);
+        }
+        catch (HttpException ex)
+        {
+            return StatusCode((int)ex.StatusCode, ex.Message);
+        }
+
+    }
+
+
 }
 

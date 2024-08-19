@@ -10,31 +10,44 @@ public class EntityToDtoProfile : Profile
     {
         #region Course
 
-        CreateMap<CourseDtoResult, Courses>().ReverseMap();
+        CreateMap<Courses, CourseDtoResult>().ReverseMap();
 
-        CreateMap<CourseDtoCreate, Courses>().ReverseMap();
+        CreateMap<Courses, CourseDtoCreate>().ReverseMap();
 
-        CreateMap<CourseDtoUpdate, Courses>().ReverseMap();
+        CreateMap<Courses, CourseDtoUpdate>().ReverseMap();
+
+        CreateMap<Courses, CourseEvaluationDtoResult>()
+            .ForMember(d => d.ListEvaluations, o => o.MapFrom(s => s.ListEvaluetions))
+            .ReverseMap();
 
         #endregion
 
-        #region Student
+            #region Student
 
-        CreateMap<StudentDtoResult, Students>().ReverseMap();
+        CreateMap<Students, StudentDtoResult>().ReverseMap();
 
-        CreateMap<StudentDtoCreate, Students>().ReverseMap();
+        CreateMap<Students, StudentDtoCreate>().ReverseMap();
 
-        CreateMap<StudentDtoUpdate, Students>().ReverseMap();
+        CreateMap<Students, StudentDtoUpdate>().ReverseMap();
 
         #endregion
 
         #region Evaluetion
 
-        CreateMap<EvaluetionDtoResult, Evaluetions>().ReverseMap();
+        CreateMap<Evaluetions, EvaluetionDtoResult>().ReverseMap();
 
-        CreateMap<EvaluetionDtoCreate, Evaluetions>().ReverseMap();
+        CreateMap<Evaluetions, EvaluetionDtoCreate>().ReverseMap();
 
-        CreateMap<EvaluetionDtoUpdate, Evaluetions>().ReverseMap();
+        CreateMap<Evaluetions, EvaluetionDtoUpdate>().ReverseMap();
+
+        CreateMap<Evaluetions, EvaluetionCourseDtoResult>()
+            .ForMember(d => d.Id, o => o.MapFrom(s => s.Id))
+            .ForMember(d => d.Comment, o => o.MapFrom(s => s.Comment))
+            .ForMember(d => d.StarEvaluetion, o => o.MapFrom(s => s.StarEvaluetion))
+            .ForMember(d => d.DateTimeEvaluetion, o => o.MapFrom(s => s.DateTimeEvaluetion))
+            .ForMember(d => d.StudentId, o => o.MapFrom(s => s.StudentId))
+            .ForMember(d => d.StudadeName, o => o.MapFrom(s => s.Student.StudentName))
+            .ReverseMap();
 
         #endregion
     }

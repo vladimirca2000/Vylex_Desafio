@@ -1,46 +1,28 @@
-using Vylex.Data.Context;
 using Vylex.WebAPI.Configurations;
+using Vylex.WebAPI.Service;
 
 
 var builder = WebApplication.CreateBuilder(args);
 
-//builder.Configuration
-//    .SetBasePath(builder.Environment.ContentRootPath)
-//    .AddJsonFile("appsettings.json", true, true)
-//    .AddJsonFile($"appsettings.{builder.Environment.EnvironmentName}.json", true, true)
-//    .AddEnvironmentVariables();
+builder.Services.AddSingleton<TokenService>();
 
-//builder.Services.AddServices();
-
-
-///
-/// Add services to the container.
-/// 
 builder.Services.AddControllers();
-
 
 // Setting DBContexts
 builder.Services.AddDatabaseConfiguration(builder.Configuration);
-
-// .NET Native DI Abstraction
-builder.Services.AddDependencyInjectionConfiguration();
-
 builder.Services.AddEndpointsApiExplorer();
 
+builder.Services.AddCors();
 
+// JWT Settings
+builder.Services.AddJwtConfiguration(builder.Configuration);
 // AutoMapper Settings
 builder.Services.AddAutoMapperConfiguration();
-
 // Swagger Config
 builder.Services.AddSwaggerConfiguration();
 
-var app = builder.Build();
 
-//using (var scope = app.Services.CreateScope())
-//{
-//    using var context = scope.ServiceProvider.GetRequiredService<ContextoBase>();
-//    context.Database.EnsureCreated();
-//}
+var app = builder.Build();
 
 app.UseRouting();
 
@@ -52,11 +34,9 @@ app.UseCors(c =>
 });
 
 app.UseHttpsRedirection();
-
+app.UseAuthentication();
 app.UseAuthorization();
-
 app.MapControllers();
-
 app.UseSwaggerSetup();
 
 app.Run();

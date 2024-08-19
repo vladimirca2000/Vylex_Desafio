@@ -76,7 +76,12 @@ public class CourseService : ICourseService
         return _mapper.Map<IEnumerable<CourseDtoResult>>(listCourseResult);
     }
 
-    
+    public async Task<IEnumerable<CourseEvaluationDtoResult>> GetCoursesEvaluationAsync()
+    {
+        var listCourseResult = await _courseRepository.SelectAllCoursesEvaliationAsync();
+        if (listCourseResult == null)
+            throw new HttpException(HttpStatusCode.NotFound, "Courses not found");
 
-    
+        return _mapper.Map<IEnumerable<CourseEvaluationDtoResult>>(listCourseResult);
+    }
 }
