@@ -7,34 +7,20 @@ Teste para vaga de desenvolvedor back-end
 
 ---
 
-## Aplique as Migrations
-
-Abra o Package Manage Console e digite o comando:
-
-``` csharp
-Update-Database
-```
 
 
-### Concluído - Revisado
+## Concluído - Revisado
 > ### Não utilize a branck Master
+> ### Utilize a Branch /Desafio/Vylex
 >
 > Verifique a *[branch de desenvolvimento](https://github.com/vladimirca2000/Vylex_Desafio/tree/Feature/Desafio/Vylex)*
 
-
-## Aplique as Migrations
-
-Abra o **_Package Manage Console_** e digite o comando:
-
-``` csharp
-Update-Database
-```
 
 ## Importante
 > Banco de dados **_MySql 8_**
 > 
 > Image DockerHub : **_mysql:8.0_**
-
+> ### Aplique as Migrations do Banco de dados
 
 ---
 ### Disponivel para analise
