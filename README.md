@@ -9,9 +9,7 @@ Teste para vaga de desenvolvedor back-end
 
 
 
-## Concluído - Revisado
-> ### Não utilize a branck Master
-> ### Utilize a Branch /Desafio/Vylex
+> ## Concluído - Revisado
 >
 > Verifique a *[branch de desenvolvimento](https://github.com/vladimirca2000/Vylex_Desafio/tree/Feature/Desafio/Vylex)*
 
