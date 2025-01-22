@@ -10,8 +10,6 @@ Teste para vaga de desenvolvedor back-end
 
 
 > ## Concluído - Revisado
->
-> Verifique a *[branch de desenvolvimento](https://github.com/vladimirca2000/Vylex_Desafio/tree/Feature/Desafio/Vylex)*
 
 
 ## Importante
