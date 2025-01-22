@@ -9,12 +9,7 @@ Teste para vaga de desenvolvedor back-end
 
 
 
-## Concluído - Revisado
-> ### Não utilize a branck Master
-> ### Utilize a Branch /Desafio/Vylex
->
-> Verifique a *[branch de desenvolvimento](https://github.com/vladimirca2000/Vylex_Desafio/tree/Feature/Desafio/Vylex)*
-
+> ## Concluído - Revisado
 
 ## Importante
 > Banco de dados **_MySql 8_**
